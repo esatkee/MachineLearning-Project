@@ -1,0 +1,13 @@
+,f1
+pca_SVM,0.9214824687891323
+pca_Random Forest,0.8803700342944436
+pca_Linear Regression,0.13021308980213092
+pca_Neural Network,0.9147501656357777
+lda_SVM,0.9579941987346074
+lda_Random Forest,0.960391454251829
+lda_Linear Regression,0.15870485678704857
+lda_Neural Network,0.9563888658670867
+rfe_SVM,0.9820774199531175
+rfe_Random Forest,1.0
+rfe_Linear Regression,0.15571195174060576
+rfe_Neural Network,1.0

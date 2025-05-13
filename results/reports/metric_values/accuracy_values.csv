@@ -1,0 +1,13 @@
+,accuracy
+pca_SVM,0.9232876712328767
+pca_Random Forest,0.8849315068493151
+pca_Linear Regression,0.07945205479452055
+pca_Neural Network,0.915068493150685
+lda_SVM,0.958904109589041
+lda_Random Forest,0.9616438356164384
+lda_Linear Regression,0.09863013698630137
+lda_Neural Network,0.9561643835616438
+rfe_SVM,0.9835616438356164
+rfe_Random Forest,1.0
+rfe_Linear Regression,0.0958904109589041
+rfe_Neural Network,1.0

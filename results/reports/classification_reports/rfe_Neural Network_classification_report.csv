@@ -1,0 +1,9 @@
+,precision,recall,f1-score,support
+Bulutlu,1.0,1.0,1.0,162.0
+Güneşli,1.0,1.0,1.0,6.0
+Karlı,1.0,1.0,1.0,177.0
+Parçalı Bulutlu,1.0,1.0,1.0,1.0
+Rüzgarlı,1.0,1.0,1.0,19.0
+accuracy,1.0,1.0,1.0,1.0
+macro avg,1.0,1.0,1.0,365.0
+weighted avg,1.0,1.0,1.0,365.0

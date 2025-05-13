@@ -1,12 +1,12 @@
 ,precision
 pca_SVM,0.9212441854328601
-pca_Random Forest,0.8813205079613656
+pca_Random Forest,0.8876610353852952
 pca_Linear Regression,0.36059009483667015
-pca_Neural Network,0.9172415784167767
+pca_Neural Network,0.921936057755766
 lda_SVM,0.9585293667478471
-lda_Random Forest,0.9593353228417101
+lda_Random Forest,0.9543813269924195
 lda_Linear Regression,0.405989168525008
-lda_Neural Network,0.9569886428977598
+lda_Neural Network,0.9555720396339812
 rfe_SVM,0.9809956103837129
 rfe_Random Forest,1.0
 rfe_Linear Regression,0.41396592048112263

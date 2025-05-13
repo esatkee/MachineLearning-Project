@@ -100,10 +100,10 @@ def normalize_and_select_features(X_train, X_test, y_train, method='pca'):
         X_test_selected = selector.transform(X_test_scaled)
         print(f"Seçilen özellikler: {selector.support_}")
         print(f"Özellik boyutu: {X_train.shape[1]} -> {X_train_selected.shape[1]}")
-        return X_train_selected, X_test_selected, selector
+        return X_train_selected, X_test_selected, selector, scaler
     else:
         print("\nÖzellik seçimi yapılmadı.")
-        return X_train_scaled, X_test_scaled, None
+        return X_train_scaled, X_test_scaled, None, None
 
     print("\nFeature selector eğitiliyor...")
     if method == 'lda':
@@ -122,14 +122,16 @@ def normalize_and_select_features(X_train, X_test, y_train, method='pca'):
 
     print(f"Özellik boyutu: {X_train.shape[1]} -> {X_train_selected.shape[1]}")
 
-    return X_train_selected, X_test_selected, selector
+    return X_train_selected, X_test_selected, selector, scaler
+
 
 def main():
     results_dir = 'results'
     subdirs = {
         'graphs': ['confusion_matrices', 'metric_comparisons'],
         'reports': ['classification_reports', 'metric_values'],
-        'models': ['saved_models']
+        'models': ['saved_models'],
+        'feature_selectors': ['pca', 'lda', 'rfe']
     }
 
     if not os.path.exists(results_dir):
@@ -186,8 +188,26 @@ def main():
             print("\n" + "-" * 50)
             print(f"{method.upper()} YÖNTEMİ UYGULANIYOR")
             print("-" * 50)
-            X_train_sel, X_test_sel, selector = normalize_and_select_features(X_train, X_test, y_train, method)
-            feature_selectors[method] = (X_train_sel, X_test_sel, selector)
+            X_train_sel, X_test_sel, selector, scaler = normalize_and_select_features(X_train, X_test, y_train, method)
+            feature_selectors[method] = (X_train_sel, X_test_sel, selector, scaler)
+
+            # Feature selector'ı kaydet
+            if selector is not None:
+                selector_path = os.path.join(
+                    results_dir, 'feature_selectors', method,
+                    f'{method}_selector.pkl'
+                )
+                joblib.dump(selector, selector_path)
+                print(f"{method.upper()} selector kaydedildi: {selector_path}")
+
+                # Scaler'ı kaydet
+                scaler_path = os.path.join(
+                    results_dir, 'feature_selectors', method,
+                    f'{method}_scaler.pkl'
+                )
+                joblib.dump(scaler, scaler_path)
+                print(f"{method.upper()} scaler kaydedildi: {scaler_path}")
+
         except Exception as e:
             print(f"\n!!! {method} HATASI: {str(e)}")
 
@@ -203,7 +223,7 @@ def main():
     }
 
     results = {}
-    for method, (X_train_sel, X_test_sel, _) in feature_selectors.items():
+    for method, (X_train_sel, X_test_sel, selector, _) in feature_selectors.items():
         for name, model in models.items():
             try:
                 print("\n" + "-" * 50)
